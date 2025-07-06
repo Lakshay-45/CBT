@@ -13,7 +13,16 @@ test_df = pd.read_csv('test-house.csv')
 test_ids = test_df['Id']
 all_df = pd.concat([train_df.drop('SalePrice', axis=1), test_df], axis=0).drop('Id', axis=1)
 
-# 2. Preprocessing and Feature Engineering
+# 2. Feature Engineering
+# Create new features by combining existing ones
+all_df['TotalSF'] = all_df['TotalBsmtSF'] + all_df['1stFlrSF'] + all_df['2ndFlrSF']
+all_df['TotalBath'] = all_df['FullBath'] + (0.5 * all_df['HalfBath']) + \
+                      all_df['BsmtFullBath'] + (0.5 * all_df['BsmtHalfBath'])
+all_df['Age'] = all_df['YrSold'] - all_df['YearBuilt']
+all_df['RemodAge'] = all_df['YrSold'] - all_df['YearRemodAdd']
+all_df['OverallQual_sq'] = all_df['OverallQual']**2
+
+# 3. Preprocessing
 # Log-transform the target variable
 y_log = np.log1p(train_df['SalePrice'])
 
@@ -43,32 +52,23 @@ all_df = pd.get_dummies(all_df, drop_first=True)
 X = all_df[:len(train_df)]
 X_test = all_df[len(train_df):]
 
-
-# 3. Model Evaluation (Calculating "Accuracy")
-# We split our training data to create a validation set for evaluation
+# Split original training data for validation
 X_train, X_val, y_train, y_val = train_test_split(X, y_log, test_size=0.2, random_state=42)
 
-# Train a Ridge model on the training portion
-model_for_eval = Ridge(alpha=10)
-model_for_eval.fit(X_train, y_train)
-y_pred_val = model_for_eval.predict(X_val)
+# 4. Train Model
+model = Ridge(alpha=10)
+model.fit(X_train, y_train)
 
-# Calculate RMSE, a common metric for regression accuracy
-rmse = np.sqrt(mean_squared_error(y_val, y_pred_val))
+# 5. Evaluate Model on Validation Set
+val_predictions = model.predict(X_val)
+rmse = np.sqrt(mean_squared_error(y_val, val_predictions))
 print(f"Model Performance (RMSE on validation set): {rmse:.4f}")
-print("This score indicates the typical error in our model's price predictions on a log scale.")
 
-
-# 4. Train Final Model and Predict for Submission
-# Train a new model on the entire dataset for best performance
-final_model = Ridge(alpha=10)
-final_model.fit(X, y_log)
-
-# Predict on the test data and reverse the log transformation
-final_preds_log = final_model.predict(X_test)
-final_preds = np.expm1(final_preds_log)
+# 6. Predict for Submission
+test_predictions_log = model.predict(X_test)
+test_predictions = np.expm1(test_predictions_log)
 
 # Create the submission file
-submission_df = pd.DataFrame({'Id': test_ids, 'SalePrice': final_preds})
+submission_df = pd.DataFrame({'Id': test_ids, 'SalePrice': test_predictions})
 submission_df.to_csv('submission.csv', index=False)
 print("\nSubmission file 'submission.csv' created successfully.")
