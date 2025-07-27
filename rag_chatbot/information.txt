@@ -1,0 +1,46 @@
+Project Charter: Project Phoenix
+
+1. Project Overview & Purpose
+
+Project Phoenix is a strategic initiative by Innovate Inc. to completely redesign and relaunch our primary customer-facing mobile application. The current application, "InnovateApp 2.0," has seen a 15% decline in user engagement over the last fiscal year due to an outdated user interface and performance issues. The purpose of this project is to deliver a modern, fast, and intuitive mobile experience to increase user retention by 25% and improve our App Store rating from 3.5 to at least 4.5 stars within six months of launch.
+
+2. Project Goals & Objectives
+
+-   Goal 1: Enhance User Experience (UX): Redesign the entire UI/UX to be modern, intuitive, and aligned with current design best practices.
+-   Goal 2: Improve Performance: Reduce average app load time from 4 seconds to under 1 second. Decrease crash rates by 90%.
+-   Goal 3: Introduce New Features: Integrate a personalized user dashboard, in-app chat support, and a loyalty rewards program.
+-   Goal 4: Increase Adoption: Achieve 100,000 active users within the first quarter post-launch.
+
+3. Scope
+
+-   In-Scope:
+    -   Full redesign of the iOS and Android mobile applications.
+    -   Development of all features listed in Goal 3.
+    -   Backend API development to support the new features.
+    -   User migration plan from the old app to the new one.
+    -   Quality Assurance and User Acceptance Testing (UAT).
+
+-   Out-of-Scope:
+    -   A redesign of the corporate website.
+    -   Development of a Windows Phone application.
+    -   International language localization (will be considered for Phase 2).
+
+4. Timeline & Milestones
+
+-   Project Kick-off: July 1, 2024
+-   UI/UX Design Complete: August 15, 2024
+-   Development Sprint 1-4 Complete: November 30, 2024
+-   Internal Alpha Testing: December 1, 2024 - December 20, 2024
+-   Beta Launch (Invite-only): January 15, 2025
+-   Public Launch Target: Q1 2025
+
+5. Budget
+
+The total allocated budget for Project Phoenix is $450,000. This budget covers all costs related to development, design, marketing, and third-party tool licenses for one year.
+
+6. Key Stakeholders & Team
+
+-   Project Sponsor: Sarah Chen, Chief Product Officer
+-   Project Manager: David Miller
+-   Lead Engineer: Fatima Al-Jamil
+-   Lead UX Designer: Ben Carter
